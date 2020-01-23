@@ -1,5 +1,9 @@
 en:
   plugin_settings: 'Plugin settings'
+  conversion_method: 'Conversion method'
+  convert_by_server: 'External server'
+  convert_by_script: 'Local script'
   cache_expiration: 'Cache expiration time'
+  server_url: 'PlantUML server URL'
   plantuml_binary: 'PlantUML binary'
   allow_includes: 'Allow !include (ATTENTION! Security risk)'
