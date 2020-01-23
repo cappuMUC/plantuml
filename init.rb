@@ -8,7 +8,7 @@ Redmine::Plugin.register :plantuml do
   requires_redmine version: '2.6'..'4.0'
 
   settings(partial: 'settings/plantuml',
-           default: { 'plantuml_binary' => {}, 'cache_seconds' => '0', 'allow_includes' => false })
+           default: { 'convert_by' => 'server', 'server_url' => 'http://www.plantuml.com', 'plantuml_binary' => '/usr/local/bin', 'cache_seconds' => '0', 'allow_includes' => false })
 
   Redmine::WikiFormatting::Macros.register do
     desc <<EOF
