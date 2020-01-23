@@ -23,11 +23,19 @@ Redmine::Plugin.register :plantuml do
       ** (png|svg)
 EOF
     macro :plantuml do |obj, args, text|
-      raise 'No PlantUML binary set.' if Setting.plugin_plantuml['plantuml_binary'].blank?
       raise 'No or bad arguments.' if args.size != 1
       frmt = PlantumlHelper.check_format(args.first)
-      image = PlantumlHelper.plantuml(text, args.first)
-      image_tag "/plantuml/#{frmt[:type]}/#{image}#{frmt[:ext]}"
+      case Setting.plugin_plantuml['convert_by']
+      when 'server'
+      raise 'No PlantUML server URL set.' if Setting.plugin_plantuml['server_url'].blank?
+        #image tag with encoded diagram data
+        image = PlantumlHelper.encode(text)
+        image_tag "#{Setting.plugin_plantuml['server_url']}/plantuml/#{frmt[:type]}/#{image}"
+      when 'script'
+      raise 'No PlantUML binary set.' if Setting.plugin_plantuml['plantuml_binary'].blank?
+        image = PlantumlHelper.plantuml(text, args.first)
+        image_tag "/plantuml/#{frmt[:type]}/#{image}#{frmt[:ext]}"
+      end
     end
   end
 end
