@@ -19,9 +19,8 @@ module PlantumlHelper
   end
 
   def self.encode(text)
-    require 'plantuml/plantuml-encode64'
     p = sanitize_plantuml(text)
-    PlantUmlEncode64.new(p).encode.to_s
+    Plantuml::PlantumlEncode64.new(p).encode.to_s
   end
 
   def self.plantuml(text, args)
