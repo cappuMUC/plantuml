@@ -18,10 +18,16 @@ module PlantumlHelper
     File.join(Rails.root, 'files', "#{name}#{extension}")
   end
 
+  def self.encode(text)
+    require 'plantuml/plantuml-encode64'
+    p = sanitize_plantuml(text)
+    PlantUmlEncode64.new(p).encode.to_s
+  end
+
   def self.plantuml(text, args)
     frmt = check_format(args)
     name = construct_cache_key(sanitize_plantuml(text))
-    settings_binary = Setting.plugin_plantuml['plantuml_binary_default']
+    settings_binary = Setting.plugin_plantuml['plantuml_binary']
     unless File.file?(plantuml_file(name, '.pu'))
       File.open(plantuml_file(name, '.pu'), 'w') do |file|
         file.write "@startuml\n"

@@ -1,15 +1,23 @@
 <fieldset>
+  <legend><%= l(:conversion_method) %></legend>
+  <p>
+    <label><%= l(:convert_by_server) %></label>
+    <%= radio_button_tag 'settings[convert_by]', 'server', !!@settings['convert_by'].eql?('server') %>
+    <br><label><%= l(:server_url) %></label>
+    <%= text_field_tag 'settings[server_url]', @settings['server_url'], size: 60 %>
+  </p><p>
+    <br><label><%= l(:convert_by_script) %></label>
+    <%= radio_button_tag 'settings[convert_by]', 'script', !!@settings['convert_by'].eql?('script') %>
+    <br><label><%= l(:plantuml_binary) %></label>
+    <%= text_field_tag 'settings[plantuml_binary]', @settings['plantuml_binary'], size: 60 %>
+    <br><label><%= l(:cache_expiration) %></label>
+    <%= text_field_tag 'settings[cache_seconds]', @settings['cache_seconds'], size: 10, disabled: true %> seconds
+  </p>
+</fieldset>
+<fieldset>
   <legend><%= l(:plugin_settings) %></legend>
   <p>
     <label><%= l(:allow_includes) %></label>
     <%= check_box_tag 'settings[allow_includes]', 1, @settings['allow_includes'] %>
-  </p> <p>
-    <label><%= l(:cache_expiration) %></label>
-    <%= text_field_tag 'settings[cache_seconds]', @settings['cache_seconds'], size: 10, disabled: true %> seconds
-  </p>
-  <p>
-    <label><%= l(:plantuml_binary) %></label>
-    <%= text_field_tag 'settings[plantuml_binary_default]', @settings['plantuml_binary_default'], size: 60 %>
-  </p>
-
+  </p> 
 </fieldset>
