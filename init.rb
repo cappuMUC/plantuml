@@ -47,14 +47,14 @@ EOF
   end
 end
 
-Rails.configuration.to_prepare do
+Rails.application.config.after_initialize do
   # Guards against including the module multiple time (like in tests)
   # and registering multiple callbacks
-  unless Redmine::WikiFormatting::Textile::Helper.included_modules.include? PlantumlTextileHelperPatch
-    Redmine::WikiFormatting::Textile::Helper.send(:include, PlantumlTextileHelperPatch)
+  unless Redmine::WikiFormatting::Textile::Helper.included_modules.include? Plantuml::TextileHelperPatch
+    Redmine::WikiFormatting::Textile::Helper.send(:include, Plantuml::TextileHelperPatch)
   end
 
-  unless Redmine::WikiFormatting::Markdown::Helper.included_modules.include? PlantumlMarkdownHelperPatch
-    Redmine::WikiFormatting::Markdown::Helper.send(:include, PlantumlMarkdownHelperPatch)
+  unless Redmine::WikiFormatting::Markdown::Helper.included_modules.include? Plantuml::MarkdownHelperPatch
+    Redmine::WikiFormatting::Markdown::Helper.send(:include, Plantuml::MarkdownHelperPatch)
   end
 end
