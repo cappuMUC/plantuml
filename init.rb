@@ -5,7 +5,7 @@ Redmine::Plugin.register :plantuml do
   version '0.5.1'
   url 'https://github.com/dkd/plantuml'
 
-  requires_redmine version: '5.0'
+  requires_redmine version: '6.0'
 
   settings(partial: 'settings/plantuml',
            default: { 
@@ -54,7 +54,7 @@ Rails.application.config.after_initialize do
     Redmine::WikiFormatting::Textile::Helper.send(:include, Plantuml::TextileHelperPatch)
   end
 
-  unless Redmine::WikiFormatting::Markdown::Helper.included_modules.include? Plantuml::MarkdownHelperPatch
-    Redmine::WikiFormatting::Markdown::Helper.send(:include, Plantuml::MarkdownHelperPatch)
+  unless Redmine::WikiFormatting::CommonMark::Helper.included_modules.include? Plantuml::MarkdownHelperPatch
+    Redmine::WikiFormatting::CommonMark::Helper.send(:include, Plantuml::MarkdownHelperPatch)
   end
 end

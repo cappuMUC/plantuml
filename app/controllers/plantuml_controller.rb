@@ -1,5 +1,5 @@
 class PlantumlController < ApplicationController
-  unloadable
+  unloadable if respond_to?(:unloadable)
 
   def convert
     frmt = PlantumlHelper.check_format(params[:content_type])

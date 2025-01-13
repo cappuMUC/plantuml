@@ -1,11 +1,11 @@
-require_dependency 'redmine/wiki_formatting/markdown/helper'
+require_dependency 'redmine/wiki_formatting/common_mark/helper'
 module Plantuml
   module MarkdownHelperPatch
     def self.included(base) # :nodoc:
       base.send(:prepend, HelperMethodsWikiExtensions)
 
       base.class_eval do
-        unloadable # Send unloadable so it will not be unloaded in development
+        unloadable if respond_to?(:unloadable) # Send unloadable so it will not be unloaded in development
       end
     end
   end

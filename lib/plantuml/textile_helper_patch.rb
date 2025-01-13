@@ -6,7 +6,7 @@ module Plantuml
       base.send(:prepend, HelperMethodsWikiExtensions)
 
       base.class_eval do
-        unloadable # Send unloadable so it will not be unloaded in development
+        unloadable if respond_to?(:unloadable) # Send unloadable so it will not be unloaded in development
       end
     end
   end
